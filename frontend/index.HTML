@@ -3,20 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Web Weather</title>
-    <link rel="stylesheet" href="style.CSS">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class= "weather-title">
-        <div class="cloud" style="top: 10px; animation-duration: 14s;"></div>
-        <div class="cloud" style="top: 50px; animation-duration: 20s; animation-delay: -8s; transform: scale(0.7);"></div>
-        <div class="cloud" style="top: 5px; animation-duration: 10s; animation-delay: -3s; transform: scale(0.85);"></div>
-        <div class="cloud" style="top: 25px; animation-duration: 20s; animation-delay: -6s; transform: scale(0.9);"></div>
-        <div class="cloud" style="top: 3px; animation-duration: 23s; animation-delay: -10s; transform: scale(0.4);"></div>
-        <div class="maintitle">
-            <h1>Web Weather</h1>
-        </div>
-        <input class="search-box" type="text" placeholder="🔍 Search City">
-    </div>
-</body>
+    <div class="weather-title">
+        <div class="cloud" style="top: 14px; animation-duration: 14s;"></div>
+        <div class="cloud" style="top: 55px; width: 60px; height: 20px; animation-duration: 20s; animation-delay: -6s;"></div>
 
+        <div class="logo">
+            <i class="fa-solid fa-cloud"></i>
+            <span>Web Weather</span>
+        </div>
+
+        <div class="search-pill">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search city">
+        </div>
+    </div>
+
+    <main class="cities-container">
+        <div class="city-card">
+            <p class="city-name">Bogota</p>
+            <i class="fa-solid fa-cloud city-icon"></i>
+            <p class="city-temp">18°</p>
+            <p class="city-desc">Nublado</p>
+        </div>
+
+        <div class="city-card">
+            <p class="city-name">Tokyo</p>
+            <i class="fa-solid fa-cloud-rain city-icon"></i>
+            <p class="city-temp">15°</p>
+            <p class="city-desc">Lluvia ligera</p>
+        </div>
+
+        <div class="city-card featured">
+            <p class="city-name">Cairo</p>
+            <i class="fa-solid fa-sun city-icon sun"></i>
+            <p class="city-temp">34°</p>
+            <p class="city-desc">Despejado</p>
+        </div>
+
+        <div class="city-card">
+            <p class="city-name">London</p>
+            <i class="fa-solid fa-cloud city-icon"></i>
+            <p class="city-temp">12°</p>
+            <p class="city-desc">Parcial</p>
+        </div>
+    </main>
+
+</body>
 </html>
