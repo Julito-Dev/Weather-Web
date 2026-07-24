@@ -24,7 +24,7 @@ class WheatherService:
         params = {
             "latitude": lat,
             "longitude": lon,
-            "current": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability"
+            "current": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,weather_code"
         }
         
         url = "https://api.open-meteo.com/v1/forecast"
@@ -37,7 +37,8 @@ class WheatherService:
             "temperature": data["current"]["temperature_2m"],
             "humidity": data["current"]["relative_humidity_2m"],
             "apparent_temperature": data["current"]["apparent_temperature"],
-            "precipitation_probability": data["current"]["precipitation_probability"]
+            "precipitation_probability": data["current"]["precipitation_probability"],
+            "weather_code": data["current"]["weather_code"]
         }
          
         return result
@@ -54,5 +55,9 @@ class WheatherService:
         else: 
             print("NO city Valid") 
             return False
+        
+clima = WheatherService()
+
+print(clima.search("Bogota"))
             
 
