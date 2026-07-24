@@ -82,10 +82,14 @@ body {
 .cloud {
     position: absolute;
     z-index: 1;
-    width: 90px;
-    height: 26px;
-    background: rgba(255, 255, 255, 0.45);
-    border-radius: 40px;
+    width: 60px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 30px;
+    box-shadow: 
+        18px -10px 0 -2px rgba(255, 255, 255, 0.85),
+        -14px -6px 0 -4px rgba(255, 255, 255, 0.6),
+        6px -16px 0 -6px rgba(255, 255, 255, 0.6);
     animation-name: move-cloud;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
