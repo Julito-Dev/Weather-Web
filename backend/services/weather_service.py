@@ -2,7 +2,7 @@ import requests
 
 class WheatherService:
     
-    def get_latitude(self, city: str):
+    def get_coords(self, city: str):
         params = {
             "name": city
         }
@@ -12,7 +12,9 @@ class WheatherService:
         
         data = response.json()
         
-        if "results" not in data:
+        results = data.get("results")
+        
+        if not results:
             return None
         
         latitude = data["results"][0]["latitude"]
@@ -20,7 +22,7 @@ class WheatherService:
         
         return latitude, longitude
     
-    def consult_weather(self, lat, lon, city):
+    def consult_weather(self, lat, lon):
         params = {
             "latitude": lat,
             "longitude": lon,
@@ -33,7 +35,6 @@ class WheatherService:
         data = response.json()
         
         result = {
-            "city": city,
             "temperature": data["current"]["temperature_2m"],
             "humidity": data["current"]["relative_humidity_2m"],
             "apparent_temperature": data["current"]["apparent_temperature"],
@@ -43,18 +44,22 @@ class WheatherService:
          
         return result
     
+    
+    def search(self, city: str):
+        
+        coords = self.get_coords(city)
+        
+        if coords is None:
+            return None
+
+        lat, lon = coords
         
 
-    def search(self, city: str):
-        coords = self.get_latitude(city)
+        weather = self.consult_weather(lat, lon)
+        weather["city"] = city        
         
-        if coords is not None:
-            lat, lon = coords
-            return self.consult_weather(lat, lon, city)
-            
-        else: 
-            print("NO city Valid") 
-            return False
+        return weather
+        
         
 clima = WheatherService()
 
