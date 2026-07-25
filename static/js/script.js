@@ -4,7 +4,6 @@ async function loadFeaturedCities() {
 
     const data = await response.json();
 
-    console.log(data)
     return data
 }
 
@@ -80,7 +79,86 @@ function getIcon(weather_code){
 }
 
 
+// Get the User Location 
+async function initPosition() {
+    try {
+        const position = await getLocation();
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
 
+        const weather = await fetchUserWeather(lat, lon);
+
+        buildGiantCard(weather);
+    }
+
+    catch (error) {
+        alert("Showing Default Information.");
+    }
+}
+
+async function fetchUserWeather(lat, lon) {
+    const response = await fetch(`/weather/locate?lat=${lat}&lon=${lon}`);
+
+    if (!response.ok) {
+        throw new Error("Error loandig the weather");
+    }
+
+    const data = await response.json();
+
+    return data
+
+}
+
+const options = {
+    enableHighAccuracy: true,
+    maximumAge: 30000,
+    timeout: 27000,
+};
+
+function getLocation() {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+            resolve,
+            reject,
+            options
+        );
+    });
+}
+
+
+function buildGiantCard(info){
+    const container = document.getElementById("card-container");
+    container.innerHTML = "";
+
+    const cityName = document.createElement("p");
+    cityName.className = "lcity-name";
+    cityName.textContent = "📍 Your Location";
+
+    const cityTemp = document.createElement("p");
+    cityTemp.className = "lcity-temp";
+    cityTemp.textContent = `${info.temperature}°C`;
+
+    const cityHum = document.createElement("p");
+    cityHum.className = "lcity-hum";
+    cityHum.textContent = `Humidity: ${info.humidity}%`;
+
+    const probRain = document.createElement("p");
+    probRain.className = "prob-rain";
+    probRain.textContent = `Precipitation Probability: ${info.precipitation_probability}%`
+
+
+    //graph goes here
+
+    container.appendChild(cityName);
+    container.appendChild(cityTemp);
+    container.appendChild(cityHum);
+    container.appendChild(probRain);
+
+
+}
 //execute
 
-buildCards()
+await Promise.all([
+    buildCards(),
+    buildGiantCard()
+]);
