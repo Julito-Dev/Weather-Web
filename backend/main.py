@@ -39,3 +39,8 @@ async def randomSearch():
         
     return weather_cities
 
+@app.get("/weather/locate")
+async def locationWeather(lat: float, lon: float):
+    weather_city = service.consult_weather(lat, lon)
+    return weather_city    
+
